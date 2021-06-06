@@ -39,10 +39,10 @@
         <div class="col-2">
           <mat-radio-group aria-label="Select an option" [ngModelOptions]="{standalone: true}"
             [(ngModel)]="contact.Sexo">
-            <mat-radio-button value="1">Hombre</mat-radio-button>
-            <mat-radio-button value="2">Mujer</mat-radio-button>
-            <mat-radio-button value="3">Otro</mat-radio-button>
-            <mat-radio-button value="4">No Especificado</mat-radio-button>
+            <mat-radio-button value="Hombre">Hombre</mat-radio-button>
+            <mat-radio-button value="Mujer">Mujer</mat-radio-button>
+            <mat-radio-button value="Otro">Otro</mat-radio-button>
+            <mat-radio-button value="No Especificado">No Especificado</mat-radio-button>
           </mat-radio-group>
 
           <mat-form-field>
@@ -50,8 +50,8 @@
             <mat-select placeholder="Color Favorito" [ngModelOptions]="{standalone: true}"
               [(ngModel)]="contact.ColorFav">
               <mat-option>None</mat-option>
-              <ng-container *ngFor="let favouriteColour of ColorsFav">
-                <mat-option value="{{favouriteColour.id}}">{{favouriteColour.value}}</mat-option>
+              <ng-container *ngFor="let ColorFav of ColorsFav">
+                <mat-option value="{{ColorFav.value}}">{{ColorFav.value}}</mat-option>
               </ng-container>
             </mat-select>
           </mat-form-field>
@@ -94,11 +94,12 @@
       <p>Color: {{cont.ColorFav}} </p>
       <p>Sexo: {{cont.Sexo}}</p>
 
-      <button class="button" mat-flat-button color="primary" (click)=" update( i )">Actualizar</button>
-      <button class="button" mat-flat-button color="warn" (click)=" delete( i )">Borrar</button>
+      <button class="button" mat-raised-button color="primary" (click)=" update( i )"><span class="material-icons">
+        edit</span></button>
+      <button class="button" mat-raised-button color="warn" (click)=" delete( i )"><span class="material-icons">
+        delete</span></button>
       <mat-divider></mat-divider>
     </mat-list-item>
-
   </mat-list>
 
 </mat-card>

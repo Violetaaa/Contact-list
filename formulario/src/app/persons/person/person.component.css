@@ -18,6 +18,10 @@
     margin-bottom: 10px;
 }
 
+ button:hover, button:active {
+   opacity: 0.9;
+}
+
 .mat-list-item p, .mat-list-item h3 {
     padding-right: 10px;
 }

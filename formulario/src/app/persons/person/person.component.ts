@@ -19,15 +19,16 @@ export class PersonComponent implements OnInit {
   contacts: Array<Person> = []
 
   contact: Person = {
-        Nombre: "",
-        Apellidos: "",
-        Edad: "",
-        Dni: "",
-        Cumpleanos: "",
-        ColorFav: "",
-        Sexo: ""
-        // ,
-        // notes: ""
+    // _id: null,
+    Nombre: "",
+    Apellidos: "",
+    Edad: "",
+    Dni: "",
+    Cumpleanos: "",
+    ColorFav: "",
+    Sexo: ""
+    // ,
+    // notes: ""
   }
 
   ColorsFav = [
@@ -42,62 +43,80 @@ export class PersonComponent implements OnInit {
   ];
 
 
-  constructor(private _userService: UserServiceService) {}
+  constructor(private _userService: UserServiceService) { }
 
   ngOnInit(): void {
 
     this._userService.getUsers().subscribe(data => {
       console.log(data);
-     this.contacts = data; 
+      this.contacts = data;
     }, error => {
       console.log(error)
-    } )
+    })
 
   }
 
-  add( form : NgForm ){
-    if( this.do === 'insert' ){
+  add(form: NgForm) {
+    if (this.do === 'insert') {
 
-      let Cumpleanos  = new Date(this.contact.Cumpleanos);
+      let Cumpleanos = new Date(this.contact.Cumpleanos);
       let day = Cumpleanos.getDay();
       let month = Cumpleanos.getMonth();
       let year = Cumpleanos.getFullYear();
       let EdadNum = parseInt(this.contact.Edad)
-      let Nombre = this.contact.Nombre;
-      let Apellidos = this.contact.Apellidos;
-      let ColorFav = this.contact.ColorFav;
+      // let Nombre = this.contact.Nombre;
+      // let Apellidos = this.contact.Apellidos;
+      // let ColorFav = this.contact.ColorFav;
+      // let Sexo = this.contact.Sexo;
 
-      this.contact.Cumpleanos = `${day}/${month}/${year}`
+      this.contact.Cumpleanos = `${year}-${month}-${day}`
 
-      if(EdadNum > 0 && EdadNum <= 125){
-      this.contacts.push( this.contact )
+      if (EdadNum > 0 && EdadNum <= 125) {
+        let _that = this;
+        this._userService.postUser(this.contact).subscribe(data => {
+          // console.log(data)
+          this._userService.getUsers().subscribe(data => {
+            _that.contacts = data
+
+            this.contact = {
+              // _id: null,
+              Nombre: "",
+              Apellidos: "",
+              Edad: "",
+              Dni: "",
+              Cumpleanos: new Date(),
+              ColorFav: "",
+              Sexo: ""
+            }
+          })
+        });
       }
 
-      this.contact = {
-        Nombre: "",
-        Apellidos: "",
-        Edad: "",
-        Dni: "",
-        Cumpleanos: new Date(),
-        ColorFav: "",
-        Sexo: ""
-        // ,
-        // notes: ""
-      }
-
-    }else{
-      this.contacts[ this.position ] = this.contact
+    } else {
+      this.contacts[this.position] = this.contact
       this.do = 'insert'
     }
     form.resetForm()
   }
 
-  delete( delPosition : number )    : void {
-    this.contacts.splice( delPosition , 1 )
+  delete(delPosition: number): void {
+    this.contacts.splice(delPosition, 1)
   }
-  update( upPosition : number ) : void {
-    this.contact  = this.contacts[ upPosition ];
-    this.do   = 'update'
+  //   delete( delPosition : number): void {
+
+  //     this._userService.deleteUser(delPosition).subscribe(data => {
+  //       // this.http.delete(`http://localhost:5000/user/${id}`).subscribe(( res )=>{
+  //       this._userService.getUsers().subscribe(data => {
+  //         this.contacts = data
+  //       })
+  //     })
+
+  //   //this.contacts.splice( delPosition , 1 )
+  // }
+
+  update(upPosition: number): void {
+    this.contact = this.contacts[upPosition];
+    this.do = 'update'
     this.position = upPosition
   }
 }

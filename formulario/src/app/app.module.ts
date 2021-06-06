@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from "./material/material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -13,6 +12,7 @@ import {MatListModule} from '@angular/material/list';
 import { AppComponent } from './app.component';
 import { PersonsComponent } from './persons/persons.component';
 import { PersonComponent } from './persons/person/person.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
