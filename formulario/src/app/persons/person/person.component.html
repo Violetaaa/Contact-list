@@ -8,26 +8,26 @@
           <mat-form-field appearance="outline">
             <mat-label>Nombre</mat-label>
             <input matInput type="text" minlength="3" placeholder="Nombre" [ngModelOptions]="{standalone: true}"
-              [(ngModel)]="contact.name">
+              [(ngModel)]="contact.Nombre">
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Apellidos</mat-label>
             <input matInput type="text" minlength="3" placeholder="Apellido/s" [ngModelOptions]="{standalone: true}"
-              [(ngModel)]="contact.surnames">
+              [(ngModel)]="contact.Apellidos">
           </mat-form-field>
         </div>
 
         <mat-form-field appearance="outline">
           <mat-label>Edad</mat-label>
           <input matInput type="text" min="0" max="125" placeholder="Edad" [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="contact.age">
+            [(ngModel)]="contact.Edad">
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>DNI</mat-label>
           <input matInput type="text" placeholder="NIF (8 números y 1 letra)" pattern="^[0-9]{8,8}[A-Za-z]$"
-            [ngModelOptions]="{standalone: true}" [(ngModel)]="contact.dni">
+            [ngModelOptions]="{standalone: true}" [(ngModel)]="contact.Dni">
         </mat-form-field>
 
       </div>
@@ -38,7 +38,7 @@
 
         <div class="col-2">
           <mat-radio-group aria-label="Select an option" [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="contact.sex">
+            [(ngModel)]="contact.Sexo">
             <mat-radio-button value="1">Hombre</mat-radio-button>
             <mat-radio-button value="2">Mujer</mat-radio-button>
             <mat-radio-button value="3">Otro</mat-radio-button>
@@ -48,9 +48,9 @@
           <mat-form-field>
             <mat-label>Color Favorito</mat-label>
             <mat-select placeholder="Color Favorito" [ngModelOptions]="{standalone: true}"
-              [(ngModel)]="contact.favouriteColour">
+              [(ngModel)]="contact.ColorFav">
               <mat-option>None</mat-option>
-              <ng-container *ngFor="let favouriteColour of favouriteColours">
+              <ng-container *ngFor="let favouriteColour of ColorsFav">
                 <mat-option value="{{favouriteColour.id}}">{{favouriteColour.value}}</mat-option>
               </ng-container>
             </mat-select>
@@ -58,15 +58,15 @@
           <mat-form-field>
             <mat-label>Cumpleaños</mat-label>
             <input matInput [matDatepicker]="picker" placeholder="Fecha Cumpleaños"
-              [ngModelOptions]="{standalone: true}" [(ngModel)]="contact.birthday">
+              [ngModelOptions]="{standalone: true}" [(ngModel)]="contact.Cumpleanos">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-          <mat-form-field>
+          <!-- <mat-form-field>
             <mat-label>Notas</mat-label>
             <input matInput type="text" placeholder="Comentario" [ngModelOptions]="{standalone: true}"
               [(ngModel)]="contact.notes">
-          </mat-form-field>
+          </mat-form-field> -->
         </div>
 
         <div class="button-row">
@@ -87,12 +87,12 @@
 
   <mat-list>
     <mat-list-item *ngFor="let cont of contacts; let i = index">
-      <p>Nombre y apellidos: {{ cont.name }} {{ cont.surnames }} </p>
-      <p>Dni: {{ cont.dni }} </p>
-      <p>Edad: {{ cont.age }} </p>
-      <p>Cumpleaños: {{cont.birthday | date: 'dd/MM/yyyy'}} </p>
-      <p>Color: {{cont.favouriteColour}} </p>
-      <p>Sexo: {{cont.sex}}</p>
+      <p>Nombre y apellidos: {{ cont.Nombre }} {{ cont.Apellidos }} </p>
+      <p>Dni: {{ cont.Dni }} </p>
+      <p>Edad: {{ cont.Edad }} </p>
+      <p>Cumpleaños: {{cont.Cumpleanos | date: 'dd/MM/yyyy'}} </p>
+      <p>Color: {{cont.ColorFav}} </p>
+      <p>Sexo: {{cont.Sexo}}</p>
 
       <button class="button" mat-flat-button color="primary" (click)=" update( i )">Actualizar</button>
       <button class="button" mat-flat-button color="warn" (click)=" delete( i )">Borrar</button>

@@ -19,17 +19,18 @@ export class PersonComponent implements OnInit {
   contacts: Array<Person> = []
 
   contact: Person = {
-        name: "",
-        surnames: "",
-        age: "",
-        dni: "",
-        birthday: "",
-        favouriteColour: "",
-        sex: "",
-        notes: ""
+        Nombre: "",
+        Apellidos: "",
+        Edad: "",
+        Dni: "",
+        Cumpleanos: "",
+        ColorFav: "",
+        Sexo: ""
+        // ,
+        // notes: ""
   }
 
-  favouriteColours = [
+  ColorsFav = [
     { id: 1, value: 'Rojo' },
     { id: 2, value: 'Azul' },
     { id: 3, value: 'Amarillo' },
@@ -47,7 +48,7 @@ export class PersonComponent implements OnInit {
 
     this._userService.getUsers().subscribe(data => {
       console.log(data);
-     // this.contacts = data; 
+     this.contacts = data; 
     }, error => {
       console.log(error)
     } )
@@ -57,30 +58,31 @@ export class PersonComponent implements OnInit {
   add( form : NgForm ){
     if( this.do === 'insert' ){
 
-      let birthDate  = new Date(this.contact.birthday);
-      let day = birthDate.getDay();
-      let month = birthDate.getMonth();
-      let year = birthDate.getFullYear();
-      let ageNum = parseInt(this.contact.age)
-      let name = this.contact.name;
-      let surnames = this.contact.surnames;
-      let favouriteColour = this.contact.favouriteColour;
+      let Cumpleanos  = new Date(this.contact.Cumpleanos);
+      let day = Cumpleanos.getDay();
+      let month = Cumpleanos.getMonth();
+      let year = Cumpleanos.getFullYear();
+      let EdadNum = parseInt(this.contact.Edad)
+      let Nombre = this.contact.Nombre;
+      let Apellidos = this.contact.Apellidos;
+      let ColorFav = this.contact.ColorFav;
 
-      this.contact.birthday = `${day}/${month}/${year}`
+      this.contact.Cumpleanos = `${day}/${month}/${year}`
 
-      if(ageNum > 0 && ageNum <= 125){
+      if(EdadNum > 0 && EdadNum <= 125){
       this.contacts.push( this.contact )
       }
 
       this.contact = {
-        name: "",
-        surnames: "",
-        age: "",
-        dni: "",
-        birthday: new Date(),
-        favouriteColour: "",
-        sex: "",
-        notes: ""
+        Nombre: "",
+        Apellidos: "",
+        Edad: "",
+        Dni: "",
+        Cumpleanos: new Date(),
+        ColorFav: "",
+        Sexo: ""
+        // ,
+        // notes: ""
       }
 
     }else{

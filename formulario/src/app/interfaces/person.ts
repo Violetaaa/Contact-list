@@ -1,12 +1,13 @@
 export interface Person {
-        name: String,
-        surnames: String,
-        age: any,
-        dni: String,
-        birthday: any,
-        favouriteColour: String,
-        sex: String,
-        notes: String
+        Nombre: String,
+        Apellidos: String,
+        Edad: any,
+        Dni: String,
+        Cumpleanos: any,
+        ColorFav: String,
+        Sexo: String
+        // ,
+        // notes: String
       }
 
 
