@@ -7,10 +7,9 @@ import { Person } from '../interfaces/person';
   providedIn: 'root'
 })
 export class UserServiceService {
-  url='http://localhost:3000/users';
+  url='http://localhost:3000/users/';
 
   constructor(private http: HttpClient) { 
-    
   }
 
   getUsers(): Observable<any>{
@@ -21,8 +20,12 @@ export class UserServiceService {
     return this.http.post(this.url, person);
   }
 
-  // deleteUser(id: number): Observable <any>{
-  //   return this.http.delete(this.url + id);
-  // }
+  deleteUser(id: number): Observable <any>{
+    return this.http.delete(this.url + id);
+  }
+
+  updateUser(id: number, person: Person): Observable <any>{
+    return this.http.put(this.url + id, person);
+  }
 
 }

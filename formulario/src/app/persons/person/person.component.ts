@@ -76,7 +76,8 @@ export class PersonComponent implements OnInit {
         this._userService.postUser(this.contact).subscribe(data => {
           // console.log(data)
           this._userService.getUsers().subscribe(data => {
-            _that.contacts = data
+            // _that.contacts = data
+            this.contacts = data;
 
             this.contact = {
               // _id: null,
@@ -99,18 +100,21 @@ export class PersonComponent implements OnInit {
     form.resetForm()
   }
 
-  delete(delPosition: number): void {
-    this.contacts.splice(delPosition, 1)
-  }
-  //   delete( delPosition : number): void {
+  // delete(delPosition: number): void {
+  //   this.contacts.splice(delPosition, 1)
+  // }
 
-  //     this._userService.deleteUser(delPosition).subscribe(data => {
-  //       // this.http.delete(`http://localhost:5000/user/${id}`).subscribe(( res )=>{
-  //       this._userService.getUsers().subscribe(data => {
-  //         this.contacts = data
-  //       })
-  //     })
 
+
+    delete( delPosition : number): void {
+
+      this._userService.deleteUser(delPosition).subscribe(data => {
+        // this.http.delete(`http://localhost:5000/user/${id}`).subscribe(( res )=>{
+        this._userService.getUsers().subscribe(data => {
+          this.contacts = data
+        })
+      })
+    }
   //   //this.contacts.splice( delPosition , 1 )
   // }
 
