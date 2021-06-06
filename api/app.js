@@ -11,7 +11,7 @@ var usersRouter = require('./routes/users');
 
 //Creación de la aplicacion
 var app = express();
-
+app.use(cors())
 //Se configura el módulo para generar un log de las peticiones que recibe el servidor y verlas por la consola
 app.use(logger('dev'));
 //Se configura un middleware para que traduzca todas las peticiones de tipo JSON para facilitar su tratamiento.
@@ -27,6 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.use(cors())
+
 //se exporta la aplicación para que pueda ser utilizada desde otros ficheros que incluyan app.js
 module.exports = app;

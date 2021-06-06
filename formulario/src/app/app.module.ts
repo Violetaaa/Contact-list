@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { MaterialModule } from "./material/material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -28,7 +29,8 @@ import { PersonComponent } from './persons/person/person.component';
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
-  MatListModule
+  MatListModule,
+  HttpClientModule
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }], // Para cambiar el formato de fecha Mat-Datepicker a DD / MM / YYYY
   bootstrap: [AppComponent]

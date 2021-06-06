@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Person } from './../../interfaces/person';
+import { UserServiceService } from 'src/app/services/user-service.service';
 
 @Component({
   selector: 'app-person',
@@ -39,9 +41,18 @@ export class PersonComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor(private _userService: UserServiceService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this._userService.getUsers().subscribe(data => {
+      console.log(data);
+     // this.contacts = data; 
+    }, error => {
+      console.log(error)
+    } )
+
+  }
 
   add( form : NgForm ){
     if( this.do === 'insert' ){
