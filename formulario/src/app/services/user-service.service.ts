@@ -16,6 +16,10 @@ export class UserServiceService {
     return this.http.get(this.url);
   }
 
+  getUser(id: number): Observable <any>{
+    return this.http.get(this.url + id);
+  }
+
   postUser(person: Person): Observable<any>{
     return this.http.post(this.url, person);
   }

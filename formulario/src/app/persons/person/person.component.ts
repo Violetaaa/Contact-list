@@ -46,41 +46,28 @@ export class PersonComponent implements OnInit {
   constructor(private _userService: UserServiceService) { }
 
   ngOnInit(): void {
-
-    this._userService.getUsers().subscribe(data => {
-      console.log(data);
-      this.contacts = data;
-    }, error => {
-      console.log(error)
-    })
-
+    this._userService.getUsers().subscribe(data => this.contacts = data);
   }
 
   add(form: NgForm) {
+    //añadir nuevo
     if (this.do === 'insert') {
 
       let Cumpleanos = new Date(this.contact.Cumpleanos);
       let day = Cumpleanos.getDay();
       let month = Cumpleanos.getMonth();
       let year = Cumpleanos.getFullYear();
-      let EdadNum = parseInt(this.contact.Edad)
-      // let Nombre = this.contact.Nombre;
-      // let Apellidos = this.contact.Apellidos;
-      // let ColorFav = this.contact.ColorFav;
-      // let Sexo = this.contact.Sexo;
+      let EdadNum = parseInt(this.contact.Edad);
 
       this.contact.Cumpleanos = `${year}-${month}-${day}`
 
       if (EdadNum > 0 && EdadNum <= 125) {
         let _that = this;
         this._userService.postUser(this.contact).subscribe(data => {
-          // console.log(data)
           this._userService.getUsers().subscribe(data => {
-            // _that.contacts = data
             this.contacts = data;
 
             this.contact = {
-              // _id: null,
               Nombre: "",
               Apellidos: "",
               Edad: "",
@@ -93,34 +80,29 @@ export class PersonComponent implements OnInit {
         });
       }
 
+      //actualizar
     } else {
-      this.contacts[this.position] = this.contact
-      this.do = 'insert'
+      this._userService.updateUser(this.contact._id, this.contact).subscribe(data => {
+        this._userService.getUsers().subscribe(data => {
+          this.contacts = data;
+          this.do = 'insert';
+        })
+      })
     }
     form.resetForm()
   }
 
-  // delete(delPosition: number): void {
-  //   this.contacts.splice(delPosition, 1)
-  // }
-
-
-
-    delete( delPosition : number): void {
-
-      this._userService.deleteUser(delPosition).subscribe(data => {
-        // this.http.delete(`http://localhost:5000/user/${id}`).subscribe(( res )=>{
-        this._userService.getUsers().subscribe(data => {
-          this.contacts = data
-        })
+  delete(delPosition: number): void {
+    this._userService.deleteUser(delPosition).subscribe(data => {
+      this._userService.getUsers().subscribe(data => {
+        this.contacts = data
       })
-    }
-  //   //this.contacts.splice( delPosition , 1 )
-  // }
+    })
+  }
 
-  update(upPosition: number): void {
-    this.contact = this.contacts[upPosition];
+  update(contact: Person, position: number): void {
     this.do = 'update'
-    this.position = upPosition
+    this.contact = contact;
+    this.contacts[position] = this.contact
   }
 }
