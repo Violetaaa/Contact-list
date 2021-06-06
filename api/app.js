@@ -1,5 +1,6 @@
 //Importación de dependencias
 var express = require('express');
+var cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -26,5 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+app.use(cors())
 //se exporta la aplicación para que pueda ser utilizada desde otros ficheros que incluyan app.js
 module.exports = app;
