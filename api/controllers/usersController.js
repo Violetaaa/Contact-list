@@ -34,13 +34,13 @@ module.exports.users_create = function (req, res, next) {
         return;
     }
     const user = {};
-    user.Nombre = req.body.Nombre;
-    user.Apellidos = req.body.Apellidos;
-    user.Edad = req.body.Edad;
-    user.Dni = req.body.Dni;
-    user.Cumpleanos = req.body.Cumpleanos;
-    user.ColorFav = req.body.ColorFav;
-    user.Sexo = req.body.Sexo;
+    user.nombre = req.body.nombre;
+    user.apellidos = req.body.apellidos;
+    user.edad = req.body.edad;
+    user.dni = req.body.dni;
+    user.cumpleanos = req.body.cumpleanos;
+    user.colorFav = req.body.colorFav;
+    user.sexo = req.body.sexo;
     db.get().db('apidb').collection('users').insertOne(user, function (err, result) {
         if (err) {
             throw ('Fallo en la conexión con la BD');
@@ -63,13 +63,13 @@ module.exports.users_update_one = function (req, res, next) {
     const filter = {_id: new mongodb.ObjectID(req.params.id)};
     const update = {
         $set: {
-            Nombre: req.body.Nombre,
-            Apellidos: req.body.Apellidos,
-            Edad: req.body.Edad,
-            Dni: req.body.Dni,
-            Cumpleanos: req.body.Cumpleanos,
-            ColorFav: req.body.ColorFav,
-            Sexo: req.body.Sexo
+            nombre: req.body.nombre,
+            apellidos: req.body.apellidos,
+            edad: req.body.edad,
+            dni: req.body.dni,
+            cumpleanos: req.body.cumpleanos,
+            colorFav: req.body.colorFav,
+            sexo: req.body.sexo
         }
     };
     db.get().db('apidb').collection('users').updateOne(filter, update, function (err, result) {

@@ -1,10 +1,10 @@
 export interface Person {
   _id?: number;
-  Nombre: String,
-  Apellidos: String,
-  Edad: any,
-  Dni: String,
-  Cumpleanos: any,
-  ColorFav: String,
-  Sexo: String
+  nombre: String,
+  apellidos: String,
+  edad: any,
+  dni: String,
+  cumpleanos: any,
+  colorFav: String,
+  sexo: String
 }

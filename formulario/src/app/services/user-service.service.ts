@@ -6,8 +6,9 @@ import { Person } from '../interfaces/person';
 @Injectable({
   providedIn: 'root'
 })
-export class UserServiceService {
+export class UserService {
   url='http://localhost:3000/users/';
+
 
   constructor(private http: HttpClient) { 
   }

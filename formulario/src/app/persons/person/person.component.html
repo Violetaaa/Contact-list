@@ -1,76 +1,112 @@
-<form class="form" #formtemp="ngForm" (submit)=" add( formtemp ) ">
+<form class="form" #formtemp="ngForm" (submit)="add(formtemp)">
   <mat-grid-list cols="2" rowHeight="300px">
     <mat-grid-tile>
-
       <div class="controles-container">
         <div class="row">
-
           <mat-form-field appearance="outline">
             <mat-label>Nombre</mat-label>
-            <input matInput type="text" minlength="3" placeholder="Nombre" [ngModelOptions]="{standalone: true}"
-              [(ngModel)]="contact.Nombre">
+            <input
+              matInput
+              type="text"
+              minlength="3"
+              placeholder="Nombre"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="contact.nombre"
+            />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>Apellidos</mat-label>
-            <input matInput type="text" minlength="3" placeholder="Apellido/s" [ngModelOptions]="{standalone: true}"
-              [(ngModel)]="contact.Apellidos">
+            <input
+              matInput
+              type="text"
+              minlength="3"
+              placeholder="Apellido/s"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="contact.apellidos"
+            />
           </mat-form-field>
         </div>
 
         <mat-form-field appearance="outline">
           <mat-label>Edad</mat-label>
-          <input matInput type="text" min="0" max="125" placeholder="Edad" [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="contact.Edad">
+          <input
+            matInput
+            type="text"
+            min="0"
+            max="125"
+            placeholder="Edad"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="contact.edad"
+          />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>DNI</mat-label>
-          <input matInput type="text" placeholder="NIF (8 números y 1 letra)" pattern="^[0-9]{8,8}[A-Za-z]$"
-            [ngModelOptions]="{standalone: true}" [(ngModel)]="contact.Dni">
+          <input
+            matInput
+            type="text"
+            placeholder="NIF (8 números y 1 letra)"
+            pattern="^[0-9]{8,8}[A-Za-z]$"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="contact.dni"
+          />
         </mat-form-field>
-
       </div>
     </mat-grid-tile>
 
     <mat-grid-tile>
       <div class="controles-container">
-
         <div class="col-2">
-          <mat-radio-group aria-label="Select an option" [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="contact.Sexo">
+          <mat-radio-group
+            aria-label="Select an option"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="contact.sexo"
+          >
             <mat-radio-button value="Hombre">Hombre</mat-radio-button>
             <mat-radio-button value="Mujer">Mujer</mat-radio-button>
             <mat-radio-button value="Otro">Otro</mat-radio-button>
-            <mat-radio-button value="No Especificado">No Especificado</mat-radio-button>
+            <mat-radio-button value="No especificado"
+              >No especificado</mat-radio-button
+            >
           </mat-radio-group>
 
           <mat-form-field>
             <mat-label>Color Favorito</mat-label>
-            <mat-select placeholder="Color Favorito" [ngModelOptions]="{standalone: true}"
-              [(ngModel)]="contact.ColorFav">
+            <mat-select
+              placeholder="Color Favorito"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="contact.colorFav"
+            >
               <mat-option>None</mat-option>
-              <ng-container *ngFor="let ColorFav of ColorsFav">
-                <mat-option value="{{ColorFav.value}}">{{ColorFav.value}}</mat-option>
+              <ng-container *ngFor="let colorFav of colorsFav">
+                <mat-option value="{{ colorFav.value }}">{{
+                  colorFav.value
+                }}</mat-option>
               </ng-container>
             </mat-select>
           </mat-form-field>
+
           <mat-form-field>
-            <mat-label>Cumpleaños</mat-label>
-            <input matInput [matDatepicker]="picker" placeholder="Fecha Cumpleaños"
-              [ngModelOptions]="{standalone: true}" [(ngModel)]="contact.Cumpleanos">
+            <mat-label>Fecha nacimiento</mat-label>
+            <input
+              matInput
+              type="date"
+              placeholder="Fecha Cumpleaños"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="contact.cumpleanos"
+            />
+            <!-- <input matInput [matDatepicker]="picker" placeholder="Fecha Cumpleaños"
+            [(ngModel)]="contact.Cumpleanos">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker #picker></mat-datepicker> -->
           </mat-form-field>
-          <!-- <mat-form-field>
-            <mat-label>Notas</mat-label>
-            <input matInput type="text" placeholder="Comentario" [ngModelOptions]="{standalone: true}"
-              [(ngModel)]="contact.notes">
-          </mat-form-field> -->
         </div>
 
         <div class="button-row">
-          <button mat-raised-button color="primary" type="submit">Añadir</button>
+          <button mat-raised-button color="primary" type="submit">
+            Añadir
+          </button>
         </div>
       </div>
     </mat-grid-tile>
@@ -79,7 +115,7 @@
 
 <mat-card class="card">
   <h3>Contacto</h3>
-  <p>{{contact | json}}</p>
+  <p>{{ contact | json }}</p>
 </mat-card>
 
 <mat-card class="card">
@@ -87,19 +123,30 @@
 
   <mat-list>
     <mat-list-item *ngFor="let cont of contacts; let i = index">
-      <p>Nombre y apellidos: {{ cont.Nombre }} {{ cont.Apellidos }} </p>
-      <p>Dni: {{ cont.Dni }} </p>
-      <p>Edad: {{ cont.Edad }} </p>
-      <p>Cumpleaños: {{cont.Cumpleanos | date: 'dd/MM/yyyy'}} </p>
-      <p>Color: {{cont.ColorFav}} </p>
-      <p>Sexo: {{cont.Sexo}}</p>
+      <p>Nombre y apellidos: {{ cont.nombre }} {{ cont.apellidos }}</p>
+      <p>Dni: {{ cont.dni }}</p>
+      <p>Edad: {{ cont.edad }}</p>
+      <p>Cumpleaños: {{ cont.cumpleanos }}</p>
+      <p>Color: {{ cont.colorFav }}</p>
+      <p>Sexo: {{ cont.sexo }}</p>
 
-      <button class="button" mat-raised-button color="primary" (click)=" update( cont, i )"><span class="material-icons">
-        edit</span></button>
-      <button class="button" mat-raised-button color="warn" (click)=" delete( cont._id )"><span class="material-icons">
-        delete</span></button>
+      <button
+        class="button"
+        mat-raised-button
+        color="primary"
+        (click)="update(cont, i)"
+      >
+        <span class="material-icons"> edit</span>
+      </button>
+      <button
+        class="button"
+        mat-raised-button
+        color="warn"
+        (click)="delete(cont._id)"
+      >
+        <span class="material-icons"> delete</span>
+      </button>
       <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>
-
 </mat-card>
