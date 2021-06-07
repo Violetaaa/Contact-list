@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Person } from './../../interfaces/person';
 import { UserService } from 'src/app/services/user-service.service';
@@ -49,20 +48,9 @@ export class PersonComponent implements OnInit {
     //añadir nuevo
     if (this.do === 'insert') {
 
-      // let cumpleanos = new Date(this.contact.cumpleanos).toISOString();
-
-      // let day = cumpleanos.getDay();
-      // let month = cumpleanos.getMonth();
-      // let year = cumpleanos.getFullYear();
-      // this.contact.cumpleanos = `${year}-${month}-${day}`
-
-      // this.contact.cumpleanos = cumpleanos;
-      // console.log(cumpleanos)
-
       let edadNum = parseInt(this.contact.edad);
 
       if (edadNum > 0 && edadNum <= 125) {
-        let _that = this;
         this._userService.postUser(this.contact).subscribe(data => {
           this._userService.getUsers().subscribe(data => {
             this.contacts = data;
@@ -86,6 +74,16 @@ export class PersonComponent implements OnInit {
         this._userService.getUsers().subscribe(data => {
           this.contacts = data;
           this.do = 'insert';
+
+          this.contact = {
+            nombre: "",
+            apellidos: "",
+            edad: "",
+            dni: "",
+            cumpleanos: new Date(),
+            colorFav: "",
+            sexo: ""
+          }
         })
       })
     }
