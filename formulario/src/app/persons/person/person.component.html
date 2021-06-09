@@ -1,4 +1,4 @@
-<form class="form" #formtemp="ngForm" (submit)="add(formtemp)">
+<form class="form"  #myForm="ngForm" (submit)="add(myForm)">
   <mat-grid-list cols="2" rowHeight="500px">
 
     <mat-grid-tile>
@@ -76,13 +76,12 @@
 <br><br>
         <div class="controles-container">
           <div class="button-row">
-            <button mat-raised-button color="primary" type="submit">
-              Añadir
+            <button mat-stroked-button type="reset">Limpiar</button>
+            <button mat-raised-button color="primary" type="submit" >
+              {{mostrarListado? 'Añadir' : 'Actualizar' }}
             </button>
           </div>
         </div>
-
-
       </div>
 
     </mat-grid-tile>
@@ -95,7 +94,7 @@
   <p>{{ contact | json }}</p>
 </mat-card> -->
 
-<mat-card class="card">
+<mat-card class="card" *ngIf="mostrarListado">
   <h2>Lista de contactos</h2>
 
   <mat-list>

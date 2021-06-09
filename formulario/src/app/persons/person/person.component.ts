@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 
 import { Person } from './../../interfaces/person';
 import { UserService } from 'src/app/services/user-service.service';
@@ -11,9 +11,10 @@ import { UserService } from 'src/app/services/user-service.service';
 })
 
 export class PersonComponent implements OnInit {
+
   do: String = "insert"
   position: any = 0
-
+  mostrarListado: boolean = true;
   contacts: Array<Person> = []
 
   contact: Person = {
@@ -47,47 +48,44 @@ export class PersonComponent implements OnInit {
   add(form: NgForm) {
     //añadir nuevo
     if (this.do === 'insert') {
-
       let edadNum = parseInt(this.contact.edad);
-
       if (edadNum > 0 && edadNum <= 125) {
         this._userService.postUser(this.contact).subscribe(data => {
           this._userService.getUsers().subscribe(data => {
+            // this.contacts[this.position] = this.contact
             this.contacts = data;
 
-            this.contact = {
-              nombre: "",
-              apellidos: "",
-              edad: "",
-              dni: "",
-              cumpleanos: new Date(),
-              colorFav: "",
-              sexo: ""
-            }
+            form.resetForm();
+
+            // this.contact = {
+            //   nombre: "",
+            //   apellidos: "",
+            //   edad: "",
+            //   dni: "",
+            //   cumpleanos: new Date(),
+            //   colorFav: "",
+            //   sexo: ""
+            // }
           })
         });
       }
+      form.resetForm();
 
       //actualizar
     } else {
+
       this._userService.updateUser(this.contact._id, this.contact).subscribe(data => {
         this._userService.getUsers().subscribe(data => {
+          this.contacts[this.position] = this.contact
           this.contacts = data;
-          this.do = 'insert';
 
-          this.contact = {
-            nombre: "",
-            apellidos: "",
-            edad: "",
-            dni: "",
-            cumpleanos: new Date(),
-            colorFav: "",
-            sexo: ""
-          }
+          this.do = 'insert';
+          this.mostrarListado = true;
+
+          form.resetForm();
         })
       })
     }
-    form.resetForm()
   }
 
   delete(delPosition: number): void {
@@ -99,9 +97,10 @@ export class PersonComponent implements OnInit {
   }
 
   update(contact: Person, position: number): void {
-    this.do = 'update'
+    this.mostrarListado = false;
+    this.do = 'update';
     this.contact = contact;
     this.position = position;
-    this.contacts[position] = this.contact
   }
 }
+
