@@ -15,5 +15,4 @@ A la hora de crear o editar una persona, será necesario realizar las siguientes
 * Sexo: cadena de texto comprendida en la siguiente lista: Hombre, Mujer, Otro, No especificado.
 * El funcionamiento del API se puede comprobar con la aplicación Postman, al igual que se describió en la nota técnica.
 
-#### Consideraciones
-Será necesario definir un middleware adicional al API que añada unas cabeceras a todas las respuestas. Esto permitirá que los navegadores no bloqueen las peticiones al alojarse en servidores distintos a donde estamos ejecutando el interfaz. Esto se conoce como intercambio de recursos de origen cruzado (CORS) (el API se ejecuta por defecto en http://localhost:3000 y el interfaz en http://localhost:4200).
+
