@@ -1,5 +1,5 @@
 
-## Samsung Desarrolladoras - Laboratorio
+## Samsung Desarrolladoras - Laboratorio final : AGENDA
 ### Proyecto final. Desarrollo Full-Stack con JavaScript
 
 En esta práctica final se relacionarán entre sí las prácticas realizadas anteriormente. Se utilizará el interfaz creado con Angular para realizar peticiones, el API desarrollada con Express para listar, crear, editar y eliminar Personas. De esta manera, se mantendrá una agenda en el servidor que podría ser consultada desde cualquier parte con el interfaz desarrollado en Angular.
