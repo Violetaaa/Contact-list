@@ -2,11 +2,16 @@
 var db = require('../db');
 var mongodb = require('mongodb');
 
+require('dotenv').config()
+
 // Incluimos la constante "validationResult" para poder utilizar los módulos de validación:
 const { validationResult } = require('express-validator');
 
+// 
+
 // Conectamos con la base de datos MongoDB:
-db.connect('mongodb://localhost:27017', function (err) {
+
+db.connect(process.env.MONGODB_URI, function (err) {
   if (err) {
       throw ('Fallo en la conexión con la BD');
   }
